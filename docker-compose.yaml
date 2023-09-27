@@ -1,10 +1,37 @@
+
 version: "3.7"
 services:
-  
+
   django-app:
-    container_name: inawezafanya
-    image: django-img 
-    build: 
+
+    container_name: container-ya-app
+    image: image-itaunda-container
+    build:
       context: .
     ports:
       - "8000:8000"
+    networks:
+      - network-yangu
+    volumes:
+      - my-own-volume:/app
+
+
+  alpine:
+    container_name: container-from-registry-image
+    image: alpine
+    command: tail -f /dev/null
+    ports:
+      - "3000:3000"
+    networks:
+      - network-yangu
+    
+ 
+
+networks:
+  network-yangu:
+    driver: bridge
+
+volumes:
+  my-own-volume:
+  
+  
